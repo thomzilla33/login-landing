@@ -205,7 +205,7 @@
     .search-wrap {
       position: relative;
       flex: 1;
-      max-width: 380px;
+      max-width: 480px;
     }
 
     .search-ico {
@@ -293,7 +293,7 @@
       gap: 18px;
       position: relative;
       overflow: visible;
-      transition: border-color .18s ease, box-shadow .18s ease;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
       animation: cardUp .24s ease both;
     }
 
@@ -309,7 +309,8 @@
 
     .card:hover {
       border-color: var(--border-hover);
-      box-shadow: 0 4px 24px rgba(0,0,0,.28), 0 0 0 1px rgba(43,127,255,.07) inset;
+      box-shadow: 0 6px 28px rgba(0,0,0,.32), 0 0 0 1px rgba(43,127,255,.08) inset;
+      transform: translateY(-1px);
     }
 
     .tenant-av {
@@ -328,6 +329,9 @@
     .card-identity {
       flex: 0 0 210px;
       min-width: 0;
+    }
+    .card-hero .card-identity {
+      flex: 0 0 280px;
     }
 
     .card-divider {
@@ -697,35 +701,119 @@
     }
 
     /* ─── Section labels ─────────────────────────────────────── */
-    .section-label-hero {
-      font-size: 12px;
-      font-weight: 500;
+    .section-label-hero,
+    .section-label-other {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
       color: var(--text-2);
-      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 7px;
     }
+    .section-label-hero { margin-bottom: 10px; }
+    .section-label-other { margin: 20px 0 8px; }
 
-    .section-label-other {
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+    /* ─── Card description (hero only) ──────────────────────────── */
+    .card-desc {
+      font-size: 11.5px;
       color: var(--text-3);
-      margin: 18px 0 8px;
+      line-height: 1.5;
+      margin-top: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ─── Sort button ────────────────────────────────────────────── */
+    .sort-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: background .15s, border-color .15s, color .15s;
+      flex-shrink: 0;
+    }
+    .sort-btn:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.13); color: var(--text-1); }
+    .sort-btn svg { flex-shrink: 0; opacity: .6; }
+
+    /* ─── Single-tenant redirect banner ─────────────────────────── */
+    .redirect-banner {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(43,127,255,.08);
+      border: 1px solid rgba(43,127,255,.22);
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+    .redirect-banner-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    .redirect-banner-text {
+      flex: 1;
+      font-size: 12.5px;
+      color: var(--text-2);
+    }
+    .redirect-banner-text strong { color: var(--text-1); font-weight: 600; }
+    .redirect-cancel {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color .15s, color .15s;
+      white-space: nowrap;
+    }
+    .redirect-cancel:hover { border-color: rgba(255,255,255,.18); color: var(--text-1); }
+    .redirect-progress {
+      height: 2px;
+      width: 100%;
+      background: rgba(43,127,255,.18);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .redirect-progress-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: progress-fill 2.4s linear forwards;
+    }
+    @keyframes progress-fill {
+      from { width: 0%; }
+      to   { width: 100%; }
     }
 
     /* ─── Hero card variant ──────────────────────────────────── */
     .card-hero {
       padding: 18px 22px;
-      border-color: rgba(43,127,255,.28);
-      background: rgba(43,127,255,.04);
-      box-shadow: 0 2px 12px rgba(0,0,0,.22);
+      border-color: rgba(43,127,255,.42);
+      background: rgba(43,127,255,.065);
+      box-shadow: 0 0 0 1px rgba(43,127,255,.15) inset, 0 6px 24px rgba(0,0,0,.32);
     }
     .card-hero:hover {
-      border-color: rgba(43,127,255,.5);
-      box-shadow: 0 6px 28px rgba(0,0,0,.38), 0 0 0 1px rgba(43,127,255,.08) inset;
+      border-color: rgba(43,127,255,.60);
+      box-shadow: 0 0 0 1px rgba(43,127,255,.18) inset, 0 10px 36px rgba(0,0,0,.44);
     }
     .card-hero .tenant-av {
       width: 48px;
@@ -736,7 +824,7 @@
 
     /* Compact secondary cards */
     .card-compact {
-      padding: 11px 20px;
+      padding: 9px 20px;
     }
     .card-compact .tenant-av {
       width: 36px;
@@ -800,7 +888,7 @@
     <div class="eyebrow"><span class="pulse-dot"></span>Workspace Selection</div>
     <h1 class="hero-title"><span id="greetPrefix">Welcome back, </span><span class="name-accent">Thomas</span></h1>
     <p class="hero-sub" id="heroSub">
-      You have access to <strong id="tenantCount">5</strong> organizations. Select a workspace to continue.
+      You have access to <strong id="tenantCount">5</strong> organizations.
     </p>
 
     <div class="toolbar">
@@ -822,6 +910,12 @@
         <span class="search-kbd">⌘K</span>
       </div>
       <span class="count-pill" id="countPill">5 workspaces</span>
+      <button class="sort-btn" id="sortBtn" onclick="cycleSortOrder()" title="Change sort order">
+        <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+          <path d="M3 4h10M5 8h6M7 12h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span id="sortLabel">Last visited</span>
+      </button>
     </div>
   </section>
 
@@ -1113,6 +1207,7 @@ function buildCard(tenant, idx, featured = false) {
           <span class="badge badge-industry">${tenant.industry}</span>
           <span class="badge ${role.cls}">${role.label}</span>
         </div>
+        ${featured && tenant.description ? `<p class="card-desc">${tenant.description}</p>` : ''}
       </div>
 
       <div class="card-divider"></div>
@@ -1187,10 +1282,30 @@ function render(list, searching = false) {
   document.getElementById('countPill').textContent = `${n} workspace${n !== 1 ? 's' : ''}`;
 }
 
+// ─── Sort ─────────────────────────────────────────────────────────────────────
+
+const SORT_CYCLES = ['recent', 'alpha', 'role'];
+const SORT_LABELS = { recent: 'Last visited', alpha: 'A–Z', role: 'Role' };
+const ROLE_ORDER  = ['platform-admin', 'org-admin', 'member', 'viewer'];
+let sortIdx = 0;
+
+function applySort(list) {
+  const order = SORT_CYCLES[sortIdx];
+  if (order === 'alpha')  return [...list].sort((a, b) => a.name.localeCompare(b.name));
+  if (order === 'role')   return [...list].sort((a, b) => ROLE_ORDER.indexOf(a.role) - ROLE_ORDER.indexOf(b.role));
+  return list; // 'recent' = original fixture order
+}
+
+function cycleSortOrder() {
+  sortIdx = (sortIdx + 1) % SORT_CYCLES.length;
+  document.getElementById('sortLabel').textContent = SORT_LABELS[SORT_CYCLES[sortIdx]];
+  triggerRender();
+}
+
 // ─── Search ───────────────────────────────────────────────────────────────────
 
-document.getElementById('searchInput').addEventListener('input', function () {
-  const q = this.value.trim().toLowerCase();
+function triggerRender() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
   const filtered = q
     ? TENANTS.filter(t =>
         t.name.toLowerCase().includes(q) ||
@@ -1199,8 +1314,10 @@ document.getElementById('searchInput').addEventListener('input', function () {
       )
     : TENANTS;
   closeAll();
-  render(filtered, !!q);
-});
+  render(applySort(filtered), !!q);
+}
+
+document.getElementById('searchInput').addEventListener('input', triggerRender);
 
 // ─── Dropdown ─────────────────────────────────────────────────────────────────
 
@@ -1276,9 +1393,37 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ─── Single-tenant auto-redirect ─────────────────────────────────────────────
+
+let _redirectTimer = null;
+
+function startSingleTenantRedirect(tenant) {
+  const grid = document.getElementById('grid');
+  const banner = document.createElement('div');
+  banner.className = 'redirect-banner';
+  banner.id = 'redirectBanner';
+  banner.innerHTML = `
+    <div class="redirect-banner-row">
+      <div class="redirect-banner-text">
+        You only have one workspace. Redirecting to <strong>${tenant.name}</strong>…
+      </div>
+      <button class="redirect-cancel" onclick="cancelRedirect()">Cancel</button>
+    </div>
+    <div class="redirect-progress"><div class="redirect-progress-bar" id="redirectBar"></div></div>`;
+  grid.insertAdjacentElement('beforebegin', banner);
+  _redirectTimer = setTimeout(() => go(tenant.id, 'home'), 2400);
+}
+
+function cancelRedirect() {
+  clearTimeout(_redirectTimer);
+  const banner = document.getElementById('redirectBanner');
+  if (banner) banner.remove();
+}
+
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
 render(TENANTS, false);
+if (TENANTS.length === 1) startSingleTenantRedirect(TENANTS[0]);
 </script>
 </body>
 </html>
