@@ -468,7 +468,7 @@ function submitMFA() {
   setTimeout(() => {
     btn.classList.remove('loading'); btn.disabled = false;
     if (code.length === 6) {
-      window.location.href = 'tenant-selector.html';
+      window.location.href = 'index.html';
     } else {
       document.getElementById('mfaError').classList.add('visible');
     }
@@ -507,7 +507,7 @@ function ssoSignIn() {
 
 // ─── Tour steps ───────────────────────────────────────────────────────────────
 
-const PAGE_ON_TOUR_FINISH = 'tenant-selector.html?tour=1';
+const PAGE_ON_TOUR_FINISH = 'index.html?tour=1';
 
 const TOUR_STEPS = [
   {
