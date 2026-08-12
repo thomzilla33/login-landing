@@ -131,7 +131,21 @@
       max-width: 980px;
       margin: 0 auto;
       padding: 52px 28px 32px;
+      position: relative;
     }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 680px;
+      height: 280px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(43,127,255,.065) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
 
     .eyebrow {
       font-size: 10.5px;
@@ -152,6 +166,29 @@
       height: 1px;
       background: var(--accent);
       opacity: .6;
+    }
+
+    /* ─── Eyebrow pulse dot ─────────────────────────────────── */
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .pulse-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--emerald);
+      opacity: .3;
+      animation: pulse-ring 2.4s ease infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: .3; }
+      50%       { transform: scale(2); opacity: 0; }
     }
 
     .hero-title {
@@ -218,8 +255,31 @@
       color: var(--text-2);
       white-space: nowrap;
       flex-shrink: 0;
-      padding: 0 4px;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
     }
+
+    /* ─── Search ⌘K hint ─────────────────────────────────────── */
+    .search-kbd {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--text-3);
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 5px;
+      pointer-events: none;
+      transition: opacity .2s;
+      user-select: none;
+    }
+    .search-wrap:focus-within .search-kbd { opacity: 0; }
 
     /* ─── Grid ───────────────────────────────────────────────── */
     .main {
@@ -253,6 +313,11 @@
     @keyframes cardUp {
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card { animation: none; }
+      .pulse-dot::after { animation: none; }
     }
 
     .card:hover {
@@ -745,8 +810,8 @@
 
   <!-- ── Hero ──────────────────────────────────────────── -->
   <section class="hero">
-    <div class="eyebrow">Workspace Selection</div>
-    <h1 class="hero-title">Welcome back, <span class="name-accent">Thomas</span></h1>
+    <div class="eyebrow"><span class="pulse-dot"></span>Workspace Selection</div>
+    <h1 class="hero-title"><span id="greetPrefix">Welcome back, </span><span class="name-accent">Thomas</span></h1>
     <p class="hero-sub" id="heroSub">
       You have access to <strong id="tenantCount">5</strong> organizations. Select a workspace to continue.
     </p>
@@ -767,6 +832,7 @@
           autocomplete="off"
           spellcheck="false"
         />
+        <span class="search-kbd">⌘K</span>
       </div>
       <span class="count-pill" id="countPill">5 workspaces</span>
     </div>
@@ -1203,6 +1269,25 @@ function toast(msg) {
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
 }
+
+// ─── Dynamic greeting ─────────────────────────────────────────────────────────
+
+(function() {
+  const h = new Date().getHours();
+  const prefix = h < 12 ? 'Good morning, ' : h < 17 ? 'Good afternoon, ' : 'Good evening, ';
+  const el = document.getElementById('greetPrefix');
+  if (el) el.textContent = prefix;
+})();
+
+// ─── ⌘K / Ctrl+K → focus search ──────────────────────────────────────────────
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    const inp = document.getElementById('searchInput');
+    if (inp) { inp.focus(); inp.select(); }
+  }
+});
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
