@@ -1000,14 +1000,14 @@
         <span id="sortLabel">Last visited</span>
       </button>
       <div class="view-toggle">
-        <button class="view-btn active" id="vbList" onclick="setView('list')" title="List view">
+        <button class="view-btn" id="vbList" onclick="setView('list')" title="List view">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
             <rect x="2" y="3" width="12" height="2" rx="1" fill="currentColor"/>
             <rect x="2" y="7" width="12" height="2" rx="1" fill="currentColor"/>
             <rect x="2" y="11" width="12" height="2" rx="1" fill="currentColor"/>
           </svg>
         </button>
-        <button class="view-btn" id="vbGrid" onclick="setView('grid')" title="Grid view">
+        <button class="view-btn active" id="vbGrid" onclick="setView('grid')" title="Grid view">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
             <rect x="2" y="2" width="5" height="5" rx="1.2" fill="currentColor"/>
             <rect x="9" y="2" width="5" height="5" rx="1.2" fill="currentColor"/>
@@ -1348,7 +1348,7 @@ function buildCard(tenant, idx, featured = false, gridMode = false) {
 const COMPACT_LIMIT = 4;
 const LOAD_MORE_BATCH = 4;
 let _visibleCount = COMPACT_LIMIT;
-let _viewMode = 'list'; // 'list' | 'grid'
+let _viewMode = 'grid'; // 'list' | 'grid'
 
 function setView(mode) {
   _viewMode = mode;
