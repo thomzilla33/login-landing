@@ -1784,13 +1784,22 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); 
 
 // ─── Navigation (simulated) ───────────────────────────────────────────────────
 
+const STUDIO_URLS = {
+  home:       'admin-console.html',
+  data:       'data-studio-models.html',
+  agentic:    'agentic-studio.html',
+  governance: 'governance-studio.html',
+  ws:         'admin-console.html',
+};
+
 function go(tenantId, destination) {
   closeAll();
   const tenant = TENANTS.find(t => t.id === tenantId);
-  const msg = destination === 'home'
-    ? `Entering ${tenant.name}`
-    : `Opening ${STUDIOS[destination].label} in ${tenant.name}`;
-  toast(msg);
+  const dest   = destination ?? 'home';
+  const url    = STUDIO_URLS[dest] ?? 'admin-console.html';
+  const label  = dest === 'home' ? tenant.name : STUDIOS[dest].label;
+  toast(`Entering ${label}…`);
+  setTimeout(() => { window.location.href = url; }, 900);
 }
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
