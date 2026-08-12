@@ -1089,6 +1089,46 @@
       transition: background .15s, border-color .15s, color .15s;
     }
     .retry-btn:hover { background: rgba(255,255,255,.08); color: var(--text-1); border-color: rgba(255,255,255,.13); }
+
+    /* ─── Load more ──────────────────────────────────────────── */
+    .load-more-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .load-more-rule { flex: 1; height: 1px; background: var(--border); }
+    .load-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-3);
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .load-more-btn:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.12); color: var(--text-2); }
+    .load-more-btn:focus-visible { outline: 2px solid rgba(43,127,255,.5); outline-offset: 2px; }
+    .load-more-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 16px;
+      padding: 0 4px;
+      background: rgba(255,255,255,.07);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-3);
+    }
   </style>
 </head>
 <body>
@@ -1162,7 +1202,7 @@
     <div class="eyebrow"><span class="pulse-dot"></span>Workspace Selection</div>
     <h1 class="hero-title"><span id="greetPrefix">Welcome back, </span><span class="name-accent">Thomas</span></h1>
     <p class="hero-sub" id="heroSub">
-      You have access to <strong id="tenantCount">5</strong> organizations.
+      You have access to <strong id="tenantCount">8</strong> organizations.
     </p>
 
     <div class="toolbar">
@@ -1403,6 +1443,42 @@ const TENANTS = [
     color: '#8B5CF6',
     initials: 'NC',
   },
+  {
+    id: 'vertex',
+    name: 'Vertex Logistics',
+    industry: 'Logistics',
+    description: 'Fleet routing optimization and warehouse automation across 6 distribution centers. Real-time shipment tracking and carrier reconciliation agents.',
+    role: 'member',
+    studios: ['agentic', 'ws'],
+    lastVisited: '3 weeks ago',
+    recent: false,
+    color: '#0EA5E9',
+    initials: 'VL',
+  },
+  {
+    id: 'cascade',
+    name: 'Cascade Analytics',
+    industry: 'Analytics',
+    description: 'Self-serve data platform for 8 internal business units. Semantic layer governance, metric definitions, and automated data quality monitoring.',
+    role: 'org-admin',
+    studios: ['data', 'governance'],
+    lastVisited: '1 month ago',
+    recent: false,
+    color: '#EC4899',
+    initials: 'CA',
+  },
+  {
+    id: 'ironclad',
+    name: 'Ironclad Legal',
+    industry: 'LegalTech',
+    description: 'Contract lifecycle automation across 4 practice groups. AI-assisted clause extraction, obligation tracking, and renewal alert agents.',
+    role: 'viewer',
+    studios: ['data', 'agentic'],
+    lastVisited: '6 weeks ago',
+    recent: false,
+    color: '#D97706',
+    initials: 'IL',
+  },
 ];
 
 // ─── Build helpers ────────────────────────────────────────────────────────────
@@ -1519,12 +1595,47 @@ function buildCard(tenant, idx, featured = false) {
     </div>`;
 }
 
-// ─── Render ───────────────────────────────────────────────────────────────────
+// ─── Load more ────────────────────────────────────────────────────────────────
 
+const COMPACT_LIMIT = 5;
+const LOAD_MORE_BATCH = 3;
+let _visibleCount = COMPACT_LIMIT;
+let _currentList = [];
+
+function loadMore() {
+  _visibleCount += LOAD_MORE_BATCH;
+  renderCompactList();
+}
+
+function renderCompactList() {
+  const rest = _currentList.slice(1);
+  const visible = rest.slice(0, _visibleCount);
+  const hidden  = rest.length - visible.length;
+
+  let html = visible.map((t, i) => buildCard(t, i + 1, false)).join('');
+
+  if (hidden > 0) {
+    html += `
+      <div class="load-more-wrap">
+        <div class="load-more-rule"></div>
+        <button class="load-more-btn" onclick="loadMore()">
+          Show more
+          <span class="load-more-count">${hidden}</span>
+        </button>
+        <div class="load-more-rule"></div>
+      </div>`;
+  }
+
+  const container = document.getElementById('compact-list');
+  if (container) container.innerHTML = html;
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
 
 function render(list, searching = false) {
   const gridEl = document.getElementById('grid');
   gridEl.className = 'grid';
+  _currentList = list;
 
   if (list.length === 0) {
     gridEl.innerHTML = `
@@ -1547,9 +1658,10 @@ function render(list, searching = false) {
     `;
     if (rest.length > 0) {
       html += `<div class="section-label-other">Other workspaces</div>`;
-      html += rest.map((t, i) => buildCard(t, i + 1, false)).join('');
+      html += `<div id="compact-list"></div>`;
     }
     gridEl.innerHTML = html;
+    renderCompactList();
   } else {
     gridEl.innerHTML = list.map((t, i) => buildCard(t, i, false)).join('');
   }
@@ -1592,6 +1704,7 @@ function triggerRender() {
       )
     : TENANTS;
   closeAll();
+  _visibleCount = COMPACT_LIMIT;
   render(applySort(filtered), !!q);
 }
 
