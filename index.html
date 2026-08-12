@@ -307,6 +307,30 @@
       .pulse-dot::after { animation: none; }
     }
 
+    /* ─── Show-more button ───────────────────────────────────── */
+    .show-more-btn {
+      width: 100%;
+      padding: 11px 16px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-2);
+      font-size: 12.5px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, color .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .show-more-btn:hover {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.12);
+      color: var(--text-1);
+    }
+
     .card:hover {
       border-color: var(--border-hover);
       box-shadow: 0 6px 28px rgba(0,0,0,.32), 0 0 0 1px rgba(43,127,255,.08) inset;
@@ -1243,6 +1267,14 @@ function buildCard(tenant, idx, featured = false) {
 
 // ─── Render ───────────────────────────────────────────────────────────────────
 
+const COMPACT_LIMIT = 4;
+let _showAll = false;
+
+function expandAll() {
+  _showAll = true;
+  triggerRender();
+}
+
 function render(list, searching = false) {
   const grid = document.getElementById('grid');
 
@@ -1270,7 +1302,18 @@ function render(list, searching = false) {
     `;
     if (rest.length > 0) {
       html += `<div class="section-label-other">Other workspaces</div>`;
-      html += rest.map((t, i) => buildCard(t, i + 1)).join('');
+      const toShow = _showAll ? rest : rest.slice(0, COMPACT_LIMIT);
+      html += toShow.map((t, i) => buildCard(t, i + 1)).join('');
+      const remaining = rest.length - COMPACT_LIMIT;
+      if (!_showAll && remaining > 0) {
+        html += `
+          <button class="show-more-btn" onclick="expandAll()">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Show ${remaining} more workspace${remaining !== 1 ? 's' : ''}
+          </button>`;
+      }
     }
     grid.innerHTML = html;
   } else {
@@ -1279,6 +1322,8 @@ function render(list, searching = false) {
 
   const n = list.length;
   document.getElementById('countPill').textContent = `${n} workspace${n !== 1 ? 's' : ''}`;
+  const countEl = document.getElementById('tenantCount');
+  if (countEl) countEl.textContent = TENANTS.length;
 }
 
 // ─── Sort ─────────────────────────────────────────────────────────────────────
@@ -1303,7 +1348,8 @@ function cycleSortOrder() {
 
 // ─── Search ───────────────────────────────────────────────────────────────────
 
-function triggerRender() {
+function triggerRender(resetExpand = false) {
+  if (resetExpand) _showAll = false;
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
   const filtered = q
     ? TENANTS.filter(t =>
@@ -1316,7 +1362,7 @@ function triggerRender() {
   render(applySort(filtered), !!q);
 }
 
-document.getElementById('searchInput').addEventListener('input', triggerRender);
+document.getElementById('searchInput').addEventListener('input', () => triggerRender(true));
 
 // ─── Dropdown ─────────────────────────────────────────────────────────────────
 
