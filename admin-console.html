@@ -317,9 +317,31 @@
   --btn-tertiary-hover-bg: rgba(255,255,255,0.05);
   --btn-tertiary-focus-bg: rgba(255,255,255,0.08);
   --btn-tertiary-active-bg:rgba(255,255,255,0.15);
-  --btn-warning-bg:        #c22222;
-  --btn-warning-hover-bg:  #a31616;
-  --btn-warning-active-bg: #880f0f;
+  --btn-warning-bg:        #e05252;
+  --btn-warning-hover-bg:  #b83838;
+  --btn-warning-active-bg: #992222;
+  /* ── DS Canonical surface / field / base tokens ── */
+  --canvas:         #0A0E1A;    /* = --bg  */
+  --surface:        #0D1120;    /* = --bg2 */
+  --surface-raised: #131C2E;    /* = --bg3 */
+  --foreground:     rgba(255,255,255,0.80);
+  --muted:          rgba(255,255,255,0.05);
+  --muted-foreground:rgba(255,255,255,0.60);
+  --destructive:    #e05252;
+  --field-bg:       rgba(255,255,255,0.08);
+  --field-border:   rgba(255,255,255,0.10);
+  --field-border-hover:rgba(255,255,255,0.20);
+  --field-border-focus:#2b7fff;
+  --field-text:     rgba(255,255,255,0.80);
+  --field-placeholder:rgba(255,255,255,0.30);
+  --field-label:    rgba(255,255,255,0.60);
+  --field-icon:     rgba(255,255,255,0.30);
+  --shadow-elevation-1:2px 2px 8px 1px rgba(0,0,0,0.06);
+  --shadow-elevation-2:4px 4px 12px 2px rgba(0,0,0,0.08);
+  --shadow-elevation-3:4px 4px 12px 2px rgba(0,0,0,0.12);
+  --shadow-elevation-4:8px 8px 16px 8px rgba(0,0,0,0.08);
+  --radius-none:0px; --radius-xs:2px; --radius-s:4px; --radius-m:8px;
+  --radius-l:16px; --radius-xl:24px; --radius-xxl:32px; --radius-full:100px;
 }
 html,body{height:100%}
 body{
@@ -1227,7 +1249,7 @@ html.theme-light .ac-copilot-input{background:rgba(0,0,0,.03); color:var(--t1)}
 .ph{padding:18px 32px 16px; position:sticky; top:0; background:var(--bg); z-index:10}
 .ph-top{display:flex; align-items:flex-start; gap:16px; margin-bottom:8px}
 .ph-text{flex:1; min-width:0}
-.ph-h1{font-size:22px; font-weight:700; color:var(--t1); letter-spacing:-.01em; margin-bottom:4px}
+.ph-h1{font-size:22px; font-weight:600; color:var(--t1); letter-spacing:-.01em; margin-bottom:4px}
 .ph-sub{font-size:13px; color:var(--t2)}
 .ph-actions{display:flex; gap:8px; align-items:center; flex-shrink:0}
 .ph-kpis{display:flex; gap:14px; margin-top:10px; flex-wrap:wrap}
@@ -2293,7 +2315,7 @@ html.theme-light .int-issue-banner{
 .op-tab-count{
   display:inline-flex; align-items:center; justify-content:center;
   min-width:22px; height:18px; padding:0 6px;
-  font-size:10px; font-weight:800; border-radius:9px; line-height:1;
+  font-size:10px; font-weight:600; border-radius:9px; line-height:1;
 }
 .op-tab-count-warn{background:var(--operate-alert); color:var(--amber)}
 .op-tab-count-ok{background:rgba(5,223,114,0.12); color:var(--green)}
@@ -2324,7 +2346,7 @@ html.theme-light .int-issue-banner{
 .op-row-status .mkt-card-status{font-size:11px; padding:4px 9px}
 .op-row-main{display:flex; align-items:center; gap:12px; min-width:0}
 .op-row-text{min-width:0; flex:1}
-.op-row-name{font-size:14px; font-weight:700; color:var(--t1); margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.op-row-name{font-size:14px; font-weight:600; color:var(--t1); margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .op-row-meta{
   display:flex; align-items:center; gap:6px; flex-wrap:wrap;
   font-size:12px; color:var(--t3); font-weight:500;
@@ -6412,14 +6434,17 @@ html.theme-light .audit-filter-input{background:#FFFFFF; border-color:var(--line
 .td-page{padding:28px 32px 60px;max-width:1200px;}
 .td-stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
 .td-stat{background:var(--canvas);border:1px solid var(--line);border-radius:12px;padding:14px 18px;}
-.td-stat-val{font-size:26px;font-weight:700;color:var(--t1);line-height:1;}
+.td-stat-val{font-size:26px;font-weight:600;color:var(--t1);line-height:1;}
 .td-stat-label{font-size:11px;color:var(--t3);margin-top:4px;}
 .td-stat-sub{font-size:11px;color:var(--pri);margin-top:2px;}
 .td-filters{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-.td-search{flex:1;min-width:200px;max-width:320px;display:flex;align-items:center;gap:6px;background:var(--canvas);border:1px solid var(--line);border-radius:8px;padding:7px 10px;}
-.td-search input{background:none;border:none;outline:none;font-size:13px;color:var(--t1);width:100%;font-family:inherit;}
-.td-search input::placeholder{color:var(--t3);}
-.td-filter-select{font-size:12px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--canvas);color:var(--t1);cursor:pointer;font-family:inherit;outline:none;}
+.td-search{flex:1;min-width:200px;max-width:320px;display:flex;align-items:center;gap:6px;background:var(--field-bg);border:1px solid var(--field-border);border-radius:var(--radius-m);padding:7px 10px;transition:border-color .15s;}
+.td-search:focus-within{border-color:var(--field-border-focus);}
+.td-search input{background:none;border:none;outline:none;font-size:13px;color:var(--field-text);width:100%;font-family:inherit;}
+.td-search input::placeholder{color:var(--field-placeholder);}
+.td-filter-select{font-size:12px;padding:7px 10px;border-radius:var(--radius-m);border:1px solid var(--field-border);background:var(--field-bg);color:var(--field-text);cursor:pointer;font-family:inherit;outline:none;transition:border-color .15s;}
+.td-filter-select:hover{border-color:var(--field-border-hover);}
+.td-filter-select:focus{border-color:var(--field-border-focus);}
 .td-table-wrap{background:var(--canvas);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
 .td-table{width:100%;border-collapse:collapse;}
 .td-table th{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;padding:10px 16px;text-align:left;border-bottom:1px solid var(--line);background:var(--bg);}
@@ -7603,7 +7628,7 @@ html.theme-light .ms-theme-card{background:var(--bg2);}
 .pa-tab { background:none; border:none; padding:10px 16px; font-size:13px; font-weight:500; color:var(--color-text-subtitle); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .15s,border-color .15s; }
 .pa-tab:hover { color:var(--color-text-title); }
 .pa-tab.active { color:var(--pri); border-bottom-color:var(--pri); font-weight:600; }
-.pa-tab-count { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--bg3); border-radius:9px; font-size:11px; font-weight:700; color:var(--color-text-subtitle); margin-left:5px; }
+.pa-tab-count { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--bg3); border-radius:9px; font-size:11px; font-weight:600; color:var(--color-text-subtitle); margin-left:5px; }
 .pa-tab.active .pa-tab-count { background:var(--pri-12); color:var(--pri); }
 
 /* ── Filters bar ── */
@@ -7705,8 +7730,8 @@ html.theme-light .ms-theme-card{background:var(--bg2);}
 .ds-btn--tertiary { background:transparent; color:var(--btn-tertiary-fg); }
 .ds-btn--tertiary:hover { background:var(--btn-tertiary-hover-bg); }
 .ds-btn--tertiary:active { background:var(--btn-tertiary-active-bg); }
-.ds-btn--danger { background:var(--status-error-bg); color:var(--red); border-color:rgba(239,68,68,.2); }
-.ds-btn--danger:hover { background:rgba(239,68,68,.15); }
+.ds-btn--danger { background:rgba(224,82,82,0.12); color:var(--color-text-error); border-color:rgba(153,34,34,0.35); }
+.ds-btn--danger:hover { background:rgba(224,82,82,0.20); border-color:rgba(153,34,34,0.50); }
 .ds-btn--warning { background:var(--btn-warning-bg); color:#fff; }
 .ds-btn--warning:hover { background:var(--btn-warning-hover-bg); }
 .ds-btn--warning:active { background:var(--btn-warning-active-bg); }
@@ -11998,8 +12023,8 @@ function _obRender() {
       <div class="ob-foot">
         <div class="ob-foot-left">Step 1 of 4</div>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-ghost" onclick="closeOffboardWizard()">Cancel</button>
-          <button class="btn btn-primary" onclick="_obGoStep(2)">Next: Reassign resources</button>
+          <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="closeOffboardWizard()">Cancel</button>
+          <button class="ds-btn ds-btn-sm ds-btn--primary" onclick="_obGoStep(2)">Next: Reassign resources</button>
         </div>
       </div>
     `;
@@ -12078,8 +12103,8 @@ function _obRender() {
       <div class="ob-foot">
         <div class="ob-foot-left">Step 2 of 4</div>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-ghost" onclick="_obGoStep(1)">Back</button>
-          <button class="btn btn-primary" onclick="_obGoStep(3)">Next: Set timeline</button>
+          <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="_obGoStep(1)">Back</button>
+          <button class="ds-btn ds-btn-sm ds-btn--primary" onclick="_obGoStep(3)">Next: Set timeline</button>
         </div>
       </div>
     `;
@@ -12124,8 +12149,8 @@ function _obRender() {
       <div class="ob-foot">
         <div class="ob-foot-left">Step 3 of 4</div>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-ghost" onclick="_obGoStep(2)">Back</button>
-          <button class="btn btn-primary" onclick="_obGoStep(4)">Next: Confirm &amp; execute</button>
+          <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="_obGoStep(2)">Back</button>
+          <button class="ds-btn ds-btn-sm ds-btn--primary" onclick="_obGoStep(4)">Next: Confirm &amp; execute</button>
         </div>
       </div>
     `;
@@ -12180,8 +12205,8 @@ function _obRender() {
           This cannot be undone
         </div>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-ghost" onclick="_obGoStep(3)">Back</button>
-          <button class="btn btn-primary" id="obConfirmBtn"
+          <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="_obGoStep(3)">Back</button>
+          <button class="ds-btn ds-btn-sm ds-btn--primary" id="obConfirmBtn"
             style="background:var(--red); border-color:var(--red); opacity:${matched?1:0.4}; cursor:${matched?'pointer':'not-allowed'}"
             onclick="_obExecute()"
             ${matched?'':' disabled'}>
@@ -12740,8 +12765,8 @@ function _cwRender() {
         </div>
       </div>
       <div class="pa-slideout-foot">
-        <button class="btn btn-ghost btn-sm" onclick="cwClose()">Cancel</button>
-        <button id="cwSaveBtn" class="btn btn-primary btn-sm" onclick="cwCreate()" style="opacity:.4;pointer-events:none">Create workspace</button>
+        <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="cwClose()">Cancel</button>
+        <button id="cwSaveBtn" class="ds-btn ds-btn-sm ds-btn--primary" onclick="cwCreate()" style="opacity:.4;pointer-events:none">Create workspace</button>
       </div>
     </div>`;
   document.body.appendChild(c);
@@ -13030,7 +13055,7 @@ function renderNotifications() {
           <div class="ns-page-title">Notifications</div>
           <div class="ns-page-sub">Configure where and when you receive alerts from AIMS-OS.</div>
         </div>
-        <button class="btn btn-primary btn-sm" onclick="nsSave()">Save changes</button>
+        <button class="ds-btn ds-btn-sm ds-btn--primary" onclick="nsSave()">Save changes</button>
       </div>
 
       <!-- Delivery Channels -->
@@ -13316,14 +13341,14 @@ function renderDataPrivacy() {
         <div class="dp-export-label">Export all tenant data</div>
         <div class="dp-export-hint" id="dp-last-export">Last export: ${_dp.lastExport}</div>
       </div>
-      <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px;flex-shrink:0" onclick="dpExport()">Request export</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" style="flex-shrink:0" onclick="dpExport()">Request export</button>
     </div>
     <div class="dp-export-row">
       <div>
         <div class="dp-export-label">Data subject request</div>
         <div class="dp-export-hint">GDPR / CCPA — submit a request to access, correct, or delete an individual's personal data</div>
       </div>
-      <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px;flex-shrink:0" onclick="toast('Data subject request form coming soon','info')">Submit request</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" style="flex-shrink:0" onclick="toast('Data subject request form coming soon','info')">Submit request</button>
     </div>
   </div>
 
@@ -13442,8 +13467,8 @@ function renderBilling() {
       <div class="bl-plan-detail">50 seats · Unlimited studios · Priority support · SLA 99.9%</div>
       <div class="bl-plan-detail" style="margin-top:6px">Next billing: <strong style="color:var(--color-text-title)">${b.plan.nextDate}</strong></div>
       <div class="bl-plan-actions">
-        <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px" onclick="toast('Plan management coming soon','info')">Change plan</button>
-        <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px;color:var(--color-text-caption)" onclick="toast('A cancellation request has been sent to your account manager','info')">Cancel subscription</button>
+        <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="toast('Plan management coming soon','info')">Change plan</button>
+        <button class="ds-btn ds-btn-sm ds-btn--secondary" style="color:var(--color-text-caption)" onclick="toast('A cancellation request has been sent to your account manager','info')">Cancel subscription</button>
       </div>
     </div>
     <div style="text-align:right;flex-shrink:0">
@@ -13462,7 +13487,7 @@ function renderBilling() {
       <div class="bl-usage-label">Seats occupied</div>
       ${blUsageBar(b.plan.seats, b.plan.seatsLimit)}
       <div class="bl-usage-val${seatsWarn ? '" style="color:#F59E0B' : ''}">${b.plan.seats} / ${b.plan.seatsLimit}</div>
-      ${seatsWarn ? `<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;flex-shrink:0" onclick="navigate('#/people')">Manage seats</button>` : ''}
+      ${seatsWarn ? `<button class="ds-btn ds-btn-sm ds-btn--secondary" style="font-size:11px;padding:4px 10px;flex-shrink:0" onclick="navigate('#/people')">Manage seats</button>` : ''}
     </div>
     <div class="bl-usage-row">
       <div class="bl-usage-label">Storage</div>
@@ -13487,7 +13512,7 @@ function renderBilling() {
         <div class="bl-pm-name">•••• •••• •••• ${b.payment.last4}</div>
         <div class="bl-pm-sub">Expires ${b.payment.expiry} · ${b.payment.holder}</div>
       </div>
-      <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px;flex-shrink:0" onclick="toast('Payment method update coming soon','info')">Update card</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" style="flex-shrink:0" onclick="toast('Payment method update coming soon','info')">Update card</button>
     </div>
   </div>
 
@@ -13502,14 +13527,14 @@ function renderBilling() {
         <div class="ns-pref-label">Billing email</div>
         <div class="ns-pref-hint">billing@contoso.com</div>
       </div>
-      <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px" onclick="toast('Billing contact updated','success')">Edit</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="toast('Billing contact updated','success')">Edit</button>
     </div>
     <div class="ns-pref-row">
       <div>
         <div class="ns-pref-label">Billing address</div>
         <div class="ns-pref-hint">One Microsoft Way, Redmond, WA 98052, USA</div>
       </div>
-      <button class="btn btn-ghost" style="font-size:12px;padding:5px 12px" onclick="toast('Billing address updated','success')">Edit</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="toast('Billing address updated','success')">Edit</button>
     </div>
   </div>
 
@@ -13589,8 +13614,8 @@ function renderGovernanceDefaults() {
         </div>
       </div>
       <div class="gd-req-actions">
-        <button class="btn btn-ghost btn-sm" onclick="gdReject('${r.id}')">Reject</button>
-        <button class="btn btn-primary btn-sm" onclick="gdApprove('${r.id}')">Approve</button>
+        <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="gdReject('${r.id}')">Reject</button>
+        <button class="ds-btn ds-btn-sm ds-btn--primary" onclick="gdApprove('${r.id}')">Approve</button>
       </div>
     </div>`;
   }
@@ -13609,7 +13634,7 @@ function renderGovernanceDefaults() {
           <div class="ns-page-title">Governance Defaults</div>
           <div class="ns-page-sub">Tenant-wide defaults for the Sandbox / Truth plane model. Workspace overrides take precedence where set.</div>
         </div>
-        <button class="btn btn-primary btn-sm" onclick="gdSave()">Save changes</button>
+        <button class="ds-btn ds-btn-sm ds-btn--primary" onclick="gdSave()">Save changes</button>
       </div>
 
       <!-- Promotion Requests -->
@@ -23153,7 +23178,7 @@ function renderTenantDetail(tOrId) {
     tabBody =
       section('Tenant info', [
         row('Name', escapeHtml(t.name)),
-        row('Domain', `<code style="font-size:11px;background:var(--bg2);padding:2px 6px;border-radius:4px">${escapeHtml(t.domain)}</code>`),
+        row('Domain', `<code style="font-size:11px;background:var(--surface);border:1px solid var(--field-border);padding:2px 6px;border-radius:var(--radius-xs)">${escapeHtml(t.domain)}</code>`),
         row('Plan', _tdPlanPill(t.plan)),
         row('Status', _tdHealthLabel(t.health), t.health==='healthy'?'green':t.health==='suspended'?'red':'amber'),
         row('Tenant ID', `<code style="font-size:10px;color:var(--t3)">${t.id}</code>`),
@@ -23235,7 +23260,7 @@ function renderTenantDetail(tOrId) {
               <div style="font-size:11px;color:var(--t3);margin-top:2px">Days to retain full event logs</div>
             </div>
             <select onchange="tdSetGovernance('${t.id}','auditRetention',this.value)"
-              style="font-size:12px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg2);color:var(--t1);cursor:pointer;font-family:inherit">
+              style="font-size:12px;padding:5px 8px;border-radius:var(--radius-s);border:1px solid var(--field-border);background:var(--field-bg);color:var(--field-text);cursor:pointer;font-family:inherit;outline:none;transition:border-color .15s">
               ${[30,60,90,180,365].map(d => `<option value="${d}" ${t.governance.auditRetention===d?'selected':''}>${d} days</option>`).join('')}
             </select>
           </div>`,
@@ -23972,10 +23997,10 @@ function _paintAdDrawer() {
     </div>
 
     <div class="ad-foot">
-      <button class="btn btn-ghost btn-sm" onclick="navigator.clipboard?.writeText('${escapeHtml(eventId)}').then(()=>toast('Event ID copied','success'))">Copy event ID</button>
-      <button class="btn btn-ghost btn-sm" onclick="toast('cURL copied to clipboard','success')">Copy as cURL</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="navigator.clipboard?.writeText('${escapeHtml(eventId)}').then(()=>toast('Event ID copied','success'))">Copy event ID</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="toast('cURL copied to clipboard','success')">Copy as cURL</button>
       <div style="flex:1"></div>
-      <button class="btn btn-ghost btn-sm" onclick="closeAuditDetail();auditFilters.search='${escapeHtml(e.resource||e.actor)}';renderAudit()">Filter by ${escapeHtml(e.resource || e.actor.split(':')[0] || 'actor')}</button>
+      <button class="ds-btn ds-btn-sm ds-btn--secondary" onclick="closeAuditDetail();auditFilters.search='${escapeHtml(e.resource||e.actor)}';renderAudit()">Filter by ${escapeHtml(e.resource || e.actor.split(':')[0] || 'actor')}</button>
     </div>
   `;
 }
